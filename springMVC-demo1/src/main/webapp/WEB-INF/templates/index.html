@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<!--Thymeleaf命名空间-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+</head>
+<body>
+<h1>首页</h1>
+<!--<a href="/target> xxx </a>中的/会被浏览器解析成：localhost:8080/,所以最终解析成localhost:8080/success-->
+<!--<a href="/springMVCdemo1/success> xxx </a>中的/会被浏览器解析成：localhost:8080/,所以最终解析成localhost:8080/springMVCdemo1/success, 但是这里上下文路径springMVCdemo1被写死了-->
+<!--<a th:href="@{/success}"> xxx </a>, 通过thymeleaf语法，终解析成localhost:8080/上下文/success， 动态添加上下文路径，寻找到指定的控制器方法-->
+<a th:href="@{/success}">访问目标页面success.html</a><br/>
+
+<!--测试param，向控制器方法传递参数-->
+<a th:href="@{/target(requiredParam='myValue', requiredParam2='myValue')}">访问目标页面target.html, 测试param的另一种语法</a><br/>
+
+<!--测试param-，向控制器方法传递参数-->
+<a th:href="@{/target(requiredParam='anything', requiredParam2='myValue2')}">访问目标页面target.html, 测试param的另一种语法</a><br/>
+
+<a th:href="@{/testRest/1/admin}">测试路径中的占位符-->/testRest</a><br>
+
+<!--测试post-->
+<form th:action="@{/target}" method="post">
+    requiredParam:<input type="text" name="requiredParam"><br />
+    requiredParam2:<input type="text" name="requiredParam2">
+    <input type="submit">
+</form>
+
+
+</body>
+</html>

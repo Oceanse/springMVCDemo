@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+</head>
+<body>
+<h1>首页</h1>
+<a th:href="@{/testParam(username='admin',password=123456)}">测试SpringMVC获取请求参数-->/testParam</a><br>
+
+<a th:href="@{/testParam2(username='admin2',password=123)}">通过控制器方法的形参获取请求参数-->/testParam2</a><br>
+<a th:href="@{/testParam2_2(username='admin2',nickname='cool',nickname='handsome')}">通过控制器方法的形参获取请求参数，且存在重名参数-->/testParam2_2</a><br>
+<a th:href="@{/testParam2_3(username='admin2',nickname='sheep',nickname='goat')}">通过控制器方法的形参获取请求参数，且存在重名参数-->/testParam2_3</a><br>
+
+<a th:href="@{/testParam3(name='admin3',passwd=123456)}">通过@RequestParam获取请求参数-->/testParam3</a><br>
+
+<a th:href="@{/testCookie}">通过@CookieValue获取缓存-->/testCookie</a><br>
+
+
+<form th:action="@{/testpojo}" method="post">
+    用户名：<input type="text" name="username"><br>
+    密码：<input type="password" name="password"><br>
+    性别：<input type="radio" name="sex" value="男">男<input type="radio" name="sex" value="女">女<br>
+    年龄：<input type="text" name="age"><br>
+    邮箱：<input type="text" name="email"><br>
+    <input type="submit">
+</form>
+
+<!--视图View获取后端Model数据-->
+<a th:href="@{/fetchData}">fetchData from backend by HttpServletRequest</a><br>
+<a th:href="@{/testModelAndView}">fetchData from backend by ModelAndView</a><br>
+<a th:href="@{/testModel}">fetchData from backend by testModel</a><br>
+<a th:href="@{/testMap}">fetchData from backend by testMap</a><br>
+<a th:href="@{/testModelMap}">fetchData from backend by ModelMap</a><br>
+
+<!--测试转发 重定向视图-->
+<a th:href="@{/testHello}">testHello</a><br>
+<a th:href="@{/testForward}">testForward</a><br>
+<a th:href="@{/testRedirect}">testRedirect</a><br>
+</body>
+</html>

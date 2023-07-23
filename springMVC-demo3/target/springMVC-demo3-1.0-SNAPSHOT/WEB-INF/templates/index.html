@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" >
+    <title>Title</title>
+</head>
+<body>
+<h1>首页</h1>
+
+<a th:href="@{/employee}">访问员工信息</a><br/>
+
+<!--测试@RequestBody-->
+<form th:action="@{/testRequestBody}" method="post">
+    用户名：<input type="text" name="username"><br>
+    密码：<input type="password" name="password"><br>
+    <input type="submit">
+</form>
+
+<!--测试@RequestEntity-->
+<form th:action="@{/testRequestEntity}" method="post">
+    用户名：<input type="text" name="username"><br>
+    密码：<input type="password" name="password"><br>
+    <input type="submit">
+</form>
+
+<!--测试@ResponseBody-->
+<a th:href="@{/testResponseBody}">测试@ResponseBody</a><br/>
+<a th:href="@{/testResponseBody2}">测试@ResponseBody2</a><br/>
+ss
+<!--测试ajax请求-->
+<div id="app">
+    <a th:href="@{/testAjax}" @click="testAjax">testAjax</a><br>
+</div>
+<script type="text/javascript" th:src="@{/static/js/vue.js}"></script>
+
+<!--SpringMVC处理ajax,请求超链接-->
+<script type="text/javascript" th:src="@{/static/js/axios.min.js}"></script>
+<!--通过vue和axios处理点击事件：  -->
+<script type="text/javascript">
+    var vue = new Vue({
+        el:"#app",
+        methods:{
+            testAjax:function (event) {
+                axios({
+                    method:"post",
+                    url:event.target.href,
+                    params:{
+                        username:"admin",
+                        password:"123456"
+                    }
+                }).then(function (response) {
+                    alert(response.data);
+                });
+                event.preventDefault();
+            }
+        }
+    });
+</script>
+
+</body>
+</html>
