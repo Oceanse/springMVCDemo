@@ -4,7 +4,10 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletContext;
@@ -17,22 +20,24 @@ import java.util.UUID;
 
 public class HelloController2 {
 
-    @RequestMapping("/testUp")
-    public String testUp(MultipartFile multipartFile, HttpSession session) throws IOException {
+
+    @RequestMapping("/upload")
+    public String testUp(@RequestParam("myfile") MultipartFile multipartFile) throws IOException {
+       if(multipartFile.isEmpty()){
+           throw new RuntimeException("上传失败，请选择图片");
+       }
         //获取上传的文件的文件名
         String fileName = multipartFile.getOriginalFilename();
         //处理文件重名问题,获取扩展名
-        String hzName = fileName.substring(fileName.lastIndexOf("."));
+        String extensionName = fileName.substring(fileName.lastIndexOf("."));
         //生成新的文件名
-        fileName = UUID.randomUUID().toString() + hzName;
-        //获取服务器中photo目录的路径
-        ServletContext servletContext = session.getServletContext();
-        String photoPath = servletContext.getRealPath("photo");
-        File file = new File(photoPath);
+        fileName = UUID.randomUUID() + extensionName;
+        //获取服务器中image目录的路径，不存在则创建
+        File file = new File("./image/");
         if(!file.exists()){
-            file.mkdir();
+            file.mkdirs();
         }
-        String finalPath = photoPath + File.separator + fileName;
+        String finalPath = "./image/" + fileName;
         //实现上传功能
         multipartFile.transferTo(new File(finalPath));
         return "success";

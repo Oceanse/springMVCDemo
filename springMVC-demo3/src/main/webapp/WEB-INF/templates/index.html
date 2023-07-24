@@ -10,6 +10,8 @@
 <a th:href="@{/employee}">访问员工信息</a><br/>
 
 <!--测试@RequestBody-->
+<br/><br/>
+<p>测试@RequestBody</p>
 <form th:action="@{/testRequestBody}" method="post">
     用户名：<input type="text" name="username"><br>
     密码：<input type="password" name="password"><br>
@@ -17,6 +19,8 @@
 </form>
 
 <!--测试@RequestEntity-->
+<br/><br/>
+<p>测试RequestEntity</p>
 <form th:action="@{/testRequestEntity}" method="post">
     用户名：<input type="text" name="username"><br>
     密码：<input type="password" name="password"><br>
@@ -24,10 +28,12 @@
 </form>
 
 <!--测试@ResponseBody-->
+<br/><br/>
 <a th:href="@{/testResponseBody}">测试@ResponseBody</a><br/>
 <a th:href="@{/testResponseBody2}">测试@ResponseBody2</a><br/>
-ss
+
 <!--测试ajax请求-->
+<br/><br/>
 <div id="app">
     <a th:href="@{/testAjax}" @click="testAjax">testAjax</a><br>
 </div>
@@ -56,6 +62,16 @@ ss
         }
     });
 </script>
+<br /><br />
+<form th:action="@{/upload}" method="post" enctype="multipart/form-data">
+    <p><input type="file" name="file"></p>
+    <input type="submit" value="上传">
+</form>
+
+<form th:action="@{/upload}" method="post">
+    <input type="file" name="myfile"><br>
+    <input type="submit" value="上传">
+</form>
 
 </body>
 </html>

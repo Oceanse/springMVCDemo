@@ -63,11 +63,13 @@ public class HelloController {
     @RequestMapping("/testResponseBody")
     @ResponseBody
     public String testResponseBody(){
-        return "success";//这里不再是作为视图名称被视图解析器解析，而是直接作为响应数据(响应体)
+        return "successful";//这里不再是作为视图名称被视图解析器解析，而是直接作为响应数据(响应体)
     }
 
     /**
-     * 这里需要引入jackson依赖
+     * SpringMVC 中使用 @ResponseBody 返回Json时，需要手动添加jackson依赖
+     * @ResponseBody 注解表示该方法的返回的结果直接写入 HTTP 响应正文
+     * 通常是在使用 @RequestMapping 后，返回值通常解析为跳转路径，加上 @ResponseBody 后返回结果不会被解析为跳转路径，而是直接写入HTTP 响应正文中。
      * @return
      */
     @RequestMapping("/testResponseBody2")

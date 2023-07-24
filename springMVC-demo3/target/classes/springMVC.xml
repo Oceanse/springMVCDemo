@@ -32,4 +32,7 @@
     <mvc:view-controller path="/" view-name="index"></mvc:view-controller>
     <!--开启mvc的注解驱动模式，springmvc的开挂模式-->
     <mvc:annotation-driven></mvc:annotation-driven>
+
+    <!--必须通过文件解析器的解析才能将文件转换为MultipartFile对象-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"> </bean>
 </beans>
